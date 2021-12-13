@@ -12,7 +12,8 @@ We used a SQLlite file to analyze the weather patterns on the island of Oahu to 
 
 ## Results
 
-![dp](https://user-images.githubusercontent.com/90511014/145733318-4ea43490-8a3e-4833-a455-a17cfce23ac8.png)![jp](https://user-images.githubusercontent.com/90511014/145733377-c873551f-3fa1-48e8-b888-3e09af97bf65.png)
+
+![jtg](https://user-images.githubusercontent.com/90511014/145742245-dc42a20f-8837-473c-87ce-3ae6021eb6d1.png)![dtg](https://user-images.githubusercontent.com/90511014/145742255-edbe8a2e-df70-4f3e-a285-bf00fd1ac706.png)
 
 
 ### Mean
@@ -28,7 +29,10 @@ We used a SQLlite file to analyze the weather patterns on the island of Oahu to 
 - December temperatures range from 56 to 83 
 
 
-![JuneDecription](https://user-images.githubusercontent.com/90511014/145729117-4cb850b8-ee28-43fd-adc6-baafb11880a8.png)![DecemberDescription](https://user-images.githubusercontent.com/90511014/145729127-9c4ed08d-0d6e-402a-b865-0c40c0f22b89.png)
+![JuneDecription](https://user-images.githubusercontent.com/90511014/145742297-48b461ad-042a-4301-8537-68aecb323a77.png)![DecemberDescription](https://user-images.githubusercontent.com/90511014/145742303-b1e80277-f7de-4768-b17a-0e687eeb386c.png)
+
+
+
 
 
 
@@ -45,16 +49,19 @@ In both months the mean and median is the same this means that the temperature i
 
     d_p = session.query(Measurement.date,Measurement.prcp).\
         filter(func.strftime("%m", Measurement.date) == "12").all()
-   ![dp](https://user-images.githubusercontent.com/90511014/145733410-3f50540f-3f0e-4f5c-8bbb-173922c4a11c.png)![dpg](https://user-images.githubusercontent.com/90511014/145733415-6f54f93c-0ddf-404c-a49b-7bc07db49675.png)
+   
+ ![dp](https://user-images.githubusercontent.com/90511014/145742661-96371cf2-7a2d-4f5a-8856-c08cb9232f8e.png)![dpg](https://user-images.githubusercontent.com/90511014/145742498-c29c2251-f088-48fd-aa01-75739c08778d.png)
 
 
+The above queries shows the precipitation in June and December. For the most part it is low participation but there are some outliers that are a bit higher. December also has a slightly higher precipitation that June. This shows that rain should not be an issue.  
     
 ### June and December Precipitation by Station
     j_p_s = session.query(func.avg(Measurement.prcp), func.min(Measurement.prcp),func.max(Measurement.prcp), Measurement.station).\
         filter(func.strftime("%m", Measurement.date) == "06").\
         group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).all()
         ﬁ
-   ![jps](https://user-images.githubusercontent.com/90511014/145733571-80c3de3f-b406-4381-ba56-7f13970d2b4f.png)
+   ![jps](https://user-images.githubusercontent.com/90511014/145733571-80c3de3f-b406-4381-ba56-7f13970d2b4f.png)!
+
 
         
     d_p_s = session.query(func.avg(Measurement.prcp), func.min(Measurement.prcp),func.max(Measurement.prcp), Measurement.station).\
@@ -62,4 +69,6 @@ In both months the mean and median is the same this means that the temperature i
         group_by(Measurement.station).order_by(func.count(Measurement.station).desc()).all()  
 ![dps](https://user-images.githubusercontent.com/90511014/145733518-e5aade88-7349-40f1-be17-bd9f73b9564f.png)
 
+
+The above queries show the precipitation by station. Station USC00519397 has an average precipitation of .02 in June and .07 December. This is the lowest average and the best location to open the shop. 
         
